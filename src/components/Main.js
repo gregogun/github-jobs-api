@@ -5,6 +5,7 @@ import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
 
 const Main = () => {
+  const [jobId, setJobId] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const { jobs, ids, isLoading, queryJobs, fetchData, loadMore } = useFetch();
 
@@ -14,7 +15,7 @@ const Main = () => {
     <Box as="main" w="100vw" minH="100vh" bgColor="gray.100">
       <h1>Main</h1>
       {showDetails ? (
-        <JobDetails jobs={jobs} setShowDetails={setShowDetails} />
+        <JobDetails jobs={jobs} jobId={jobId} setShowDetails={setShowDetails} />
       ) : (
         <JobBoard
           jobs={jobs}
@@ -22,6 +23,7 @@ const Main = () => {
           queryJobs={queryJobs}
           loadMore={loadMore}
           setShowDetails={setShowDetails}
+          setJobId={setJobId}
         />
       )}
     </Box>

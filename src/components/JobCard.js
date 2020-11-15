@@ -9,7 +9,13 @@ const JobCard = ({
   company,
   location,
   setShowDetails,
+  setJobId,
 }) => {
+  const handleClick = () => {
+    setShowDetails(true);
+    setJobId(id);
+  };
+
   return (
     <ListItem
       rounded="4px"
@@ -18,7 +24,7 @@ const JobCard = ({
       bgColor="white"
       m="16px auto"
     >
-      <Text cursor="pointer" onClick={() => setShowDetails(true)}>
+      <Text cursor="pointer" onClick={handleClick}>
         {title}
       </Text>
       <Text>{created_at}</Text>

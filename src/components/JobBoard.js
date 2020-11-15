@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import JobCard from "./JobCard";
 import { Box, Heading, List, Button, Stack, Text } from "@chakra-ui/react";
 
@@ -6,7 +6,14 @@ const Loading = () => {
   return <Heading>Loading jobs...</Heading>;
 };
 
-const JobBoard = ({ jobs, isLoading, queryJobs, loadMore, setShowDetails }) => {
+const JobBoard = ({
+  jobs,
+  isLoading,
+  queryJobs,
+  loadMore,
+  setShowDetails,
+  setJobId,
+}) => {
   return (
     <Stack
       align="center"
@@ -32,7 +39,12 @@ const JobBoard = ({ jobs, isLoading, queryJobs, loadMore, setShowDetails }) => {
       <List w="100%">
         {jobs ? (
           jobs.map((job) => (
-            <JobCard setShowDetails={setShowDetails} key={job.id} {...job} />
+            <JobCard
+              setJobId={setJobId}
+              setShowDetails={setShowDetails}
+              key={job.id}
+              {...job}
+            />
           ))
         ) : (
           <Loading />
