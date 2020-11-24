@@ -6,6 +6,9 @@ const useFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`;
   const [ids, setIds] = useState({});
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [isFullTimeOnly, setIsFullTimeOnly] = useState("");
 
   const getIds = () => {
     // make a dictionary of ids -> indexes in data
@@ -17,12 +20,12 @@ const useFetch = () => {
   };
 
   let urlCopy = url;
-  let desc = "";
-  let loc = "";
-  let isFull = "";
+  // let desc = "";
+  // let loc = "";
+  // let isFull = "";
 
   const fetchData = () => {
-    urlCopy += `description=${desc}&location=${loc}&full_time=${isFull}&page=${page}`;
+    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${page}`;
 
     console.log("fetchData is here", urlCopy);
 
@@ -48,8 +51,8 @@ const useFetch = () => {
       .catch((e) => console.log(e));
   };
 
-  const queryJobs = (query) => {
-    const { description, location, isFullTimeOnly } = query;
+  const queryJobs = () => {
+    // const { description, location, isFullTimeOnly } = query;
 
     setPage(1);
     urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${1}`;
@@ -82,7 +85,7 @@ const useFetch = () => {
     const nextPage = page + 1;
     setPage(nextPage);
 
-    urlCopy += `description=${descState}&location=${locState}&full_time=${isFullState}&page=${nextPage}`;
+    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${nextPage}`;
 
     console.log("loadMore is here", urlCopy);
 
@@ -110,7 +113,16 @@ const useFetch = () => {
 
   useEffect(fetchData, []);
 
-  return { jobs, ids, isLoading, queryJobs, fetchData, loadMore };
+  return {
+    jobs,
+    ids,
+    isLoading,
+    queryJobs,
+    loadMore,
+    setDescription,
+    setLocation,
+    setIsFullTimeOnly,
+  };
 };
 
 export default useFetch;

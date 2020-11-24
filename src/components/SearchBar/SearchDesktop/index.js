@@ -11,30 +11,30 @@ import LocationSearch from "../LocationSearch";
 import TitleSearch from "../TitleSearch";
 import StyledButton from "../../StyledButton";
 
-const SearchDesktop = ({ queryJobs }) => {
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [isFullTimeOnly, setIsFullTimeOnly] = useState("");
+const SearchDesktop = ({
+  queryJobs,
+  setDescription,
+  setLocation,
+  setIsFullTimeOnly,
+}) => {
   const { colorMode } = useColorMode();
+
+  const handleClick = (e) => {
+    if (e.target.checked) {
+      setIsFullTimeOnly("on");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("search fired");
-    console.log(isFullTimeOnly);
-    console.log(location);
-    console.log(description);
-    queryJobs({
-      location: location,
-      description: description,
-      isFullTimeOnly: isFullTimeOnly,
-    });
+    queryJobs();
   };
 
   const handleInputChange = (e) => {
     console.log("here");
     if (e.target.name === "title") {
       setDescription(e.target.value);
-      console.log(description);
     } else {
       setLocation(e.target.value);
     }
@@ -63,13 +63,13 @@ const SearchDesktop = ({ queryJobs }) => {
           <Flex w="60%">
             <Box w="50%">
               <TitleSearch
-                description={description}
+                // description={description}
                 handleInputChange={handleInputChange}
               />
             </Box>
             <Box w="50%">
               <LocationSearch
-                location={location}
+                // location={location}
                 handleInputChange={handleInputChange}
               />
             </Box>
@@ -80,11 +80,7 @@ const SearchDesktop = ({ queryJobs }) => {
                 <FormLabel mt="6px" fontSize="14px">
                   Full Time Only
                 </FormLabel>
-                <Checkbox
-                  onClick={() =>
-                    setIsFullTimeOnly("checked" === true ? "off" : "on")
-                  }
-                />
+                <Checkbox onClick={handleClick} />
               </Flex>
             </FormControl>
           </Box>

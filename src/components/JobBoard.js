@@ -8,18 +8,10 @@ const Loading = () => {
   return <Text>Loading jobs...</Text>;
 };
 
-const JobBoard = ({
-  jobs,
-  isLoading,
-  loadMore,
-  setShowDetails,
-  setJobId,
-  queryJobs,
-}) => {
+const JobBoard = ({ jobs, isLoading, loadMore, setShowDetails, setJobId }) => {
   const { colorMode } = useColorMode();
   return (
     <>
-      <SearchBar queryJobs={queryJobs} />
       <Box direction="row" w="100%" minH="100%" m="auto" p="16px">
         <Box>
           <Box>

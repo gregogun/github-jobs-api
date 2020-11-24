@@ -3,11 +3,21 @@ import { Box, useColorMode } from "@chakra-ui/react";
 import useFetch from "../utils/hooks/useFetch";
 import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
+import SearchBar from "./SearchBar";
 import { Router } from "@reach/router";
 
 const Main = () => {
   const [jobId, setJobId] = useState();
-  const { jobs, ids, isLoading, queryJobs, fetchData, loadMore } = useFetch();
+  const {
+    jobs,
+    ids,
+    isLoading,
+    queryJobs,
+    loadMore,
+    setDescription,
+    setLocation,
+    setIsFullTimeOnly,
+  } = useFetch();
   const { colorMode } = useColorMode();
 
   console.log(jobs);
@@ -20,6 +30,12 @@ const Main = () => {
       minH="100vh"
       bg={colorMode === "light" ? "neutral.100" : "default.dark"}
     >
+      <SearchBar
+        setDescription={setDescription}
+        setLocation={setLocation}
+        setIsFullTimeOnly={setIsFullTimeOnly}
+        queryJobs={queryJobs}
+      />
       <Router>
         <JobBoard
           path="/"

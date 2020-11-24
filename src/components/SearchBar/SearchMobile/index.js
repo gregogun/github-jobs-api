@@ -3,6 +3,10 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Input,
+  Icon,
+  InputGroup,
+  InputLeftElement,
   Box,
   Button,
   useColorMode,
@@ -17,41 +21,71 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import LocationSearch from "../LocationSearch";
 import TitleSearch from "../TitleSearch";
 import StyledButton from "../../StyledButton";
 // import SearchModal from "../Modal.js";
 import { FaFilter } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
 
-const SearchMobile = ({ queryJobs }) => {
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [isFullTimeOnly, setIsFullTimeOnly] = useState("");
+const SearchMobile = ({
+  queryJobs,
+  setDescription,
+  setLocation,
+  setIsFullTimeOnly,
+}) => {
+  const [locationInput, setLocationInput] = useState("");
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  console.log("updated", locationInput);
+
   const handleClick = (e) => {
-    handleSubmit(e);
+    if (e.target.checked) {
+      setIsFullTimeOnly("on");
+    }
+  };
+
+  const handleSave = () => {
+    setLocation(locationInput);
     onClose();
   };
 
-  const SearchModal = ({ modalTitle, modalFooter, children }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("search fired");
+    queryJobs();
+  };
+
+  const handleInputChange = (e) => {
+    console.log("input here");
+    if (e.target.name === "title") {
+      setDescription(e.target.value);
+    } else {
+      setLocationInput(e.target.value);
+    }
+  };
+
+  const handleLocationChange = (e) => {
+    setLocationInput(e.target.value);
+  };
+
+  const SearchModal = ({ modalTitle }) => {
+    console.log("rendered modal");
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{modalTitle}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{children}</ModalBody>
+          <ModalBody>
+            <LocationSearch />
+            <Checkbox />
+          </ModalBody>
 
           <ModalFooter>
-            <StyledButton
-              onClick={() => console.log("hi")}
-              bg="dodgerblue"
-              col="white"
-            >
-              Filter
-            </StyledButton>
+            <Button onClick={handleSave} bg="dodgerblue" color="default.light">
+              Save
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -65,35 +99,34 @@ const SearchMobile = ({ queryJobs }) => {
           <FormLabel mt="6px" fontSize="14px">
             Full Time Only
           </FormLabel>
-          <Check
-            onClick={() => setIsFullTimeOnly("checked" === true ? "off" : "on")}
-          />
+          <Check onClick={handleClick} />
         </Flex>
       </FormControl>
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("search fired");
-    console.log(isFullTimeOnly);
-    console.log(location);
-    console.log(description);
-    queryJobs({
-      location: location,
-      description: description,
-      isFullTimeOnly: isFullTimeOnly,
-    });
-  };
-
-  const handleInputChange = (e) => {
-    console.log("input here");
-    if (e.target.name === "title") {
-      setDescription(e.target.value);
-      console.log(description);
-    } else {
-      setLocation(e.target.value);
-    }
+  const LocationSearch = () => {
+    return (
+      <FormControl id="location-search">
+        <FormLabel hidden={true}>Search by location</FormLabel>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<Icon as={MdLocationOn} color="gray.500" />}
+          />
+          <Input
+            value={locationInput}
+            onChange={handleLocationChange}
+            rounded="0 8px 8px 0"
+            fontSize={{ base: "14px", md: "16px" }}
+            w="100%"
+            h="40px"
+            type="text"
+            placeholder="Location"
+          />
+        </InputGroup>
+      </FormControl>
+    );
   };
 
   return (
@@ -108,35 +141,48 @@ const SearchMobile = ({ queryJobs }) => {
       mx="auto"
       mb="32px"
     >
-      <Flex
-        direction="column"
-        // bg="grey"
-        p="8px"
-        w="100%"
-        justify="space-between"
-      >
-        <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit}>
+        <Flex
+          direction="column"
+          // bg="grey"
+          p="8px"
+          w="100%"
+          justify="space-between"
+        >
           <Box mb="8px">
-            <TitleSearch
-              description={description}
-              handleInputChange={handleInputChange}
-            />
+            <TitleSearch handleInputChange={handleInputChange} />
           </Box>
+
+          <Modal hidden={true} isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Filter by location or type</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <LocationSearch />
+                <Checkbox />
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  onClick={handleSave}
+                  bg="dodgerblue"
+                  color="default.light"
+                >
+                  Save
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+
           <Flex w="100%" direction="row" justify="space-between">
             <IconButton onClick={onOpen} icon={<FaFilter />} />
             <StyledButton bg="dodgerblue" col="white">
               Search
             </StyledButton>
           </Flex>
-        </form>
-      </Flex>
-      <SearchModal modalTitle="Filter jobs">
-        <LocationSearch
-          location={location}
-          handleInputChange={handleInputChange}
-        />
-        <Checkbox />
-      </SearchModal>
+        </Flex>
+      </form>
     </Box>
   );
 };

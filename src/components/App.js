@@ -5,10 +5,6 @@ import customTheme from "../utils/theme";
 import Header from "./Header";
 
 const App = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <ChakraProvider theme={customTheme}>
       <Header />

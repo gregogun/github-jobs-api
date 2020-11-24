@@ -21,7 +21,6 @@ const LocationSearch = ({ handleInputChange, location }) => {
         <Input
           rounded="0 8px 8px 0"
           fontSize={{ base: "14px", md: "16px" }}
-          value={location}
           onChange={handleInputChange}
           w="100%"
           h="40px"
