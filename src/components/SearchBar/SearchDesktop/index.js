@@ -47,7 +47,7 @@ const SearchDesktop = ({
     2px 4px 0 rgba(50, 50, 50, 0.12)"
       padding="16px"
       rounded="8px"
-      w={{ base: "90%", lg: "80%", xl: "70%" }}
+      w={{ base: "90%", md: "80%", lg: "75%", xl: "70%" }}
       mx="auto"
       mb="32px"
     >

@@ -18,13 +18,13 @@ const JobBoard = ({ jobs, isLoading, loadMore, setShowDetails, setJobId }) => {
             <Box
               my="8px"
               // bg="lightseagreen"
-              w={["100%", "", "80%", "60%"]}
+              w={{ base: "100%", sm: "75%", md: "50%", lg: "60%" }}
               m="auto"
             >
               {isLoading ? (
                 <Loading />
               ) : (
-                <Text fontSize="18px" fontWeight="bold">
+                <Text fontSize={{ base: "18px", md: "24px" }} fontWeight="bold">
                   Showing {jobs.length} jobs
                 </Text>
               )}

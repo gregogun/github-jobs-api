@@ -8,7 +8,6 @@ import {
   InputGroup,
   InputLeftElement,
   Box,
-  Button,
   useColorMode,
   IconButton,
   useDisclosure,
@@ -39,6 +38,8 @@ const SearchMobile = ({
 
   console.log("updated", locationInput);
 
+  let input = "";
+
   const handleClick = (e) => {
     if (e.target.checked) {
       setIsFullTimeOnly("on");
@@ -46,7 +47,7 @@ const SearchMobile = ({
   };
 
   const handleSave = () => {
-    setLocation(locationInput);
+    setLocation(input);
     onClose();
   };
 
@@ -66,30 +67,8 @@ const SearchMobile = ({
   };
 
   const handleLocationChange = (e) => {
-    setLocationInput(e.target.value);
-  };
-
-  const SearchModal = ({ modalTitle }) => {
-    console.log("rendered modal");
-    return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{modalTitle}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LocationSearch />
-            <Checkbox />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={handleSave} bg="dodgerblue" color="default.light">
-              Save
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
+    input = e.target.value;
+    console.log(input);
   };
 
   const Checkbox = () => {
@@ -115,7 +94,6 @@ const SearchMobile = ({
             children={<Icon as={MdLocationOn} color="gray.500" />}
           />
           <Input
-            value={locationInput}
             onChange={handleLocationChange}
             rounded="0 8px 8px 0"
             fontSize={{ base: "14px", md: "16px" }}
@@ -153,7 +131,7 @@ const SearchMobile = ({
             <TitleSearch handleInputChange={handleInputChange} />
           </Box>
 
-          <Modal hidden={true} isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Filter by location or type</ModalHeader>
@@ -164,13 +142,13 @@ const SearchMobile = ({
               </ModalBody>
 
               <ModalFooter>
-                <Button
+                <StyledButton
                   onClick={handleSave}
                   bg="dodgerblue"
-                  color="default.light"
+                  col="default.light"
                 >
                   Save
-                </Button>
+                </StyledButton>
               </ModalFooter>
             </ModalContent>
           </Modal>
