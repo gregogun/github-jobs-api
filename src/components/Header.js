@@ -9,6 +9,7 @@ import {
   useColorMode,
   color,
   Heading,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as ReachLink } from "@reach/router";
 import React from "react";
@@ -44,6 +45,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const colorScheme = useColorModeValue("default.light", "default.darkGray");
+
   console.log(isOpen);
 
   const toggleIsOpen = () => {
@@ -58,7 +61,7 @@ const Header = () => {
       placeItems="center"
       w="100vw"
       minH="10vh"
-      bg={colorMode === "light" ? "white" : "default.darkGray"}
+      bg={colorMode === "light" ? "default.light" : "default.darkGray"}
     >
       <Flex
         h="100%"
@@ -115,6 +118,8 @@ const Header = () => {
             aria-label={
               colorMode === "light" ? "Toggle dark mode" : "Toggle light mode"
             }
+            colorScheme={colorScheme}
+            color={colorMode === "light" ? "default.dark" : "default.light"}
             icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
           />
           <IconButton

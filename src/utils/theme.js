@@ -20,6 +20,9 @@ const customTheme = extendTheme({
     brand: {
       primary: "#1e86f7",
     },
+    neutral: {
+      100: "#f5f5f5",
+    },
   },
   fonts: {
     body: "Poppins, sans-serif",

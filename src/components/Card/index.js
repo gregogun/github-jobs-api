@@ -60,7 +60,7 @@ const Card = ({ id, created_at, type, title, company, location, setJobId }) => {
       2px 4px 0 rgba(50, 50, 50, 0.12)"
       // border="2px solid"
       // borderColor="lightgray"
-      bg={colorMode === "light" ? "white" : "default.darkGray"}
+      bg={colorMode === "light" ? "default.light" : "default.darkGray"}
       listStyleType="none"
       rounded="16px"
       // w={["100%", "90%", "75%", "30%"]}

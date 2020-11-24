@@ -99,7 +99,7 @@ const SearchMobile = ({ queryJobs }) => {
   return (
     <Box
       // display={{ base: "block", md: "none" }}
-      bg={colorMode === "light" ? "white" : "default.darkGray"}
+      bg={colorMode === "light" ? "default.light" : "default.darkGray"}
       boxShadow="2px 
     2px 4px 0 rgba(50, 50, 50, 0.12)"
       padding="16px"
