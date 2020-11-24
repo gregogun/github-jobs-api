@@ -15,12 +15,11 @@ import { Link as ReachLink } from "@reach/router";
 import React from "react";
 import Logo from "../assets/Logo";
 import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const FindJob = (props) => {
+const FindJob = () => {
   return (
     <ListItem
-      m={props.margin}
       textAlign="center"
       // mr={["12px", "16px", "24px"]}
     >
@@ -33,7 +32,10 @@ const FindJob = (props) => {
 
 const PostJob = () => {
   return (
-    <ListItem mx={{ md: "16px" }} textAlign="center">
+    <ListItem
+      // mx={{ md: "16px" }}
+      textAlign="center"
+    >
       <Link href="https://jobs.github.com/post" target="_blank" method="get">
         Post a job
       </Link>
@@ -44,6 +46,10 @@ const PostJob = () => {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const colorScheme = useColorModeValue("default.light", "default.darkGray");
 
@@ -89,10 +95,12 @@ const Header = () => {
           </Flex>
           <Box
             display={{ base: isOpen ? "block" : "none", md: "flex" }}
-            w={{ md: "35%", lg: "30%", xl: "25%" }}
+            w={{ md: "30%", lg: "30%", xl: "15%" }}
             // bg="lightseagreen"
             my="8px"
+            mx={{ md: "16px" }}
             py="16px"
+            justifyContent={{ md: "space-between" }}
             borderTop={{ base: "2px solid", md: 0 }}
             borderTopColor={
               colorMode === "light" ? "default.lightGray" : "default.lightGray"
