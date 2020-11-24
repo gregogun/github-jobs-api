@@ -1,10 +1,13 @@
 import React from "react";
-import { ChakraProvider, Box, Button } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Main from "./Main";
+import customTheme from "../utils/theme";
+import Header from "./Header";
 
 const App = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
+      <Header />
       <Main />
     </ChakraProvider>
   );

@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { Box } from "@chakra-ui/react";
-import useFetch from "../hooks/useFetch";
+import { Box, useColorMode } from "@chakra-ui/react";
+import useFetch from "../utils/hooks/useFetch";
 import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
+import { Router } from "@reach/router";
 
 const Main = () => {
   const [jobId, setJobId] = useState();
-  const [showDetails, setShowDetails] = useState(false);
   const { jobs, ids, isLoading, queryJobs, fetchData, loadMore } = useFetch();
+  const { colorMode } = useColorMode();
 
   console.log(jobs);
 
   return (
-    <Box as="main" w="100vw" minH="100vh" bgColor="gray.100">
-      <h1>Main</h1>
-      {showDetails ? (
-        <JobDetails jobs={jobs} jobId={jobId} setShowDetails={setShowDetails} />
-      ) : (
+    <Box
+      as="main"
+      pt="32px"
+      w="100vw"
+      minH="100vh"
+      bg={colorMode === "light" ? "gray.100" : "default.dark"}
+    >
+      <Router>
         <JobBoard
+          path="/"
           jobs={jobs}
           isLoading={isLoading}
-          queryJobs={queryJobs}
           loadMore={loadMore}
-          setShowDetails={setShowDetails}
           setJobId={setJobId}
+          queryJobs={queryJobs}
         />
-      )}
+        <JobDetails path="apply" jobs={jobs} jobId={jobId} />
+      </Router>
     </Box>
   );
 };

@@ -1,56 +1,75 @@
 import React, { useState } from "react";
-import JobCard from "./JobCard";
-import { Box, Heading, List, Button, Stack, Text } from "@chakra-ui/react";
+import Card from "./Card";
+import SearchBar from "./SearchBar";
+import StyledButton from "./StyledButton";
+import { Box, Text, Flex, useColorMode } from "@chakra-ui/react";
 
 const Loading = () => {
-  return <Heading>Loading jobs...</Heading>;
+  return <Text>Loading jobs...</Text>;
 };
 
 const JobBoard = ({
   jobs,
   isLoading,
-  queryJobs,
   loadMore,
   setShowDetails,
   setJobId,
+  queryJobs,
 }) => {
+  const { colorMode } = useColorMode();
   return (
-    <Stack
-      align="center"
-      direction="column"
-      w={["90%", "80%", "70%", "65%", "50%"]}
-      minH="100%"
-      m="auto"
-    >
-      <Stack w="100%" justify="space-between" direction="row" align="center">
-        <Text w="128px">Showing {jobs.length} jobs</Text>
-        {!isLoading && jobs.length >= 50 && (
-          <Button
-            w="120px"
-            bgColor="gray.700"
-            _hover={{ bgColor: "gray.600" }}
-            color="white"
-            onClick={loadMore}
+    <>
+      <SearchBar queryJobs={queryJobs} />
+      <Box direction="row" w="100%" minH="100%" m="auto" p="16px">
+        <Box>
+          <Box>
+            <Box
+              my="8px"
+              // bg="lightseagreen"
+              w={["100%", "", "80%", "60%"]}
+              m="auto"
+            >
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <Text fontSize="18px" fontWeight="bold">
+                  Showing {jobs.length} jobs
+                </Text>
+              )}
+            </Box>
+          </Box>
+
+          <Flex
+            height="100%"
+            // bg="skyblue"
+            grow="1"
+            justify="center"
+            as="ul"
+            w={{ base: "100%", sm: "80%", md: "90%", lg: "85%", xl: "70%" }}
+            direction="row"
+            wrap="wrap"
+            m="auto"
           >
-            Load More
-          </Button>
+            {jobs &&
+              jobs.map((job) => (
+                <Card
+                  setJobId={setJobId}
+                  setShowDetails={setShowDetails}
+                  key={job.id}
+                  {...job}
+                />
+              ))}
+          </Flex>
+        </Box>
+        {!isLoading && jobs.length >= 50 && (
+          <Flex justify="center" m="auto">
+            <StyledButton bg="brand.primary" col="white" onClick={loadMore}>
+              Load More
+            </StyledButton>
+          </Flex>
         )}
-      </Stack>
-      <List w="100%">
-        {jobs ? (
-          jobs.map((job) => (
-            <JobCard
-              setJobId={setJobId}
-              setShowDetails={setShowDetails}
-              key={job.id}
-              {...job}
-            />
-          ))
-        ) : (
-          <Loading />
-        )}
-      </List>
-    </Stack>
+      </Box>
+    </>
   );
 };
 
