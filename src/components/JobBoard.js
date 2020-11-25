@@ -16,11 +16,13 @@ const JobBoard = ({
   setShowDetails,
   setJobId,
   queryJobs,
-  logos,
-  colors,
   setDescription,
   setLocation,
   setIsFullTimeOnly,
+  logos,
+  colors,
+  setCurrentLogo,
+  setCurrentColor,
 }) => {
   const { colorMode } = useColorMode();
   // const [logo, setLogo] = useState();
@@ -77,12 +79,13 @@ const JobBoard = ({
             {jobs &&
               jobs.map((job) => (
                 <Card
-                  logos={logos}
-                  colors={colors}
                   setJobId={setJobId}
-                  setShowDetails={setShowDetails}
                   key={job.id}
                   {...job}
+                  logos={logos}
+                  colors={colors}
+                  setCurrentLogo={setCurrentLogo}
+                  setCurrentColor={setCurrentColor}
                 />
               ))}
           </Flex>

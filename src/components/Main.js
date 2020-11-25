@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Box, useColorMode } from "@chakra-ui/react";
+import { Box, Icon, useColorMode } from "@chakra-ui/react";
 import useFetch from "../utils/hooks/useFetch";
 import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
 import { Router } from "@reach/router";
 import CompanyLogos from "../assets/CompanyLogos";
+import { useEffect } from "react";
 
 const Main = () => {
   const [jobId, setJobId] = useState();
@@ -20,6 +21,13 @@ const Main = () => {
     setIsFullTimeOnly,
   } = useFetch();
   const { logos, colors } = CompanyLogos();
+  const [currentLogo, setCurrentLogo] = useState();
+  const [currentColor, setCurrentColor] = useState();
+
+  useEffect(() => {
+    console.log(currentLogo);
+    console.log(currentColor);
+  }, [currentColor, currentLogo]);
 
   return (
     <Box
@@ -41,9 +49,19 @@ const Main = () => {
           setLocation={setLocation}
           setIsFullTimeOnly={setIsFullTimeOnly}
           logos={logos}
+          setCurrentLogo={setCurrentLogo}
           colors={colors}
+          setCurrentColor={setCurrentColor}
         />
-        <JobDetails path="apply" jobs={jobs} jobId={jobId} />
+        <JobDetails
+          path="apply"
+          jobs={jobs}
+          jobId={jobId}
+          logos={logos}
+          colors={colors}
+          currentLogo={currentLogo}
+          currentColor={currentColor}
+        />
       </Router>
     </Box>
   );

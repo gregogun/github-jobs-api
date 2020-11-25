@@ -16,14 +16,21 @@ const LocationSearch = ({ handleInputChange, location }) => {
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          children={<Icon as={MdLocationOn} color="gray.500" />}
+          children={
+            <Icon
+              w={{ base: "20px", md: "24px" }}
+              h={{ base: "20px", md: "24px" }}
+              as={MdLocationOn}
+              color="gray.500"
+            />
+          }
         />
         <Input
           rounded="0 8px 8px 0"
-          fontSize={{ base: "14px", md: "16px" }}
+          fontSize={{ base: "14px", md: "16px", lg: "18px" }}
           onChange={handleInputChange}
           w="100%"
-          h="40px"
+          h={{ base: "40px", lg: "48px" }}
           type="text"
           placeholder="Location"
         />

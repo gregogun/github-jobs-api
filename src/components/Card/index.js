@@ -13,6 +13,7 @@ import {
 import { navigate } from "@reach/router";
 import { useState, useEffect } from "react";
 import shuffle from "../../utils/shuffleArray";
+import { FaCat } from "react-icons/fa";
 
 const Card = ({
   id,
@@ -24,16 +25,20 @@ const Card = ({
   setJobId,
   logos,
   colors,
+  setCurrentLogo,
+  setCurrentColor,
 }) => {
   const { colorMode } = useColorMode();
   const [randomValue, setRandomValue] = useState();
+  const [randomColValue, setRandomColValue] = useState();
   const [logo, setLogo] = useState();
+  const [color, setColor] = useState();
 
   const randomise = () => {
-    if (!randomValue) {
-      const random = shuffle(logos);
-      setRandomValue(random);
-    }
+    const random = shuffle(logos);
+    const randomCol = shuffle(colors);
+    setRandomValue(random);
+    setRandomColValue(randomCol);
   };
 
   const getLogo = () => {
@@ -42,17 +47,28 @@ const Card = ({
     }
   };
 
+  const getColor = () => {
+    if (!color) {
+      setColor(colors.map((color) => color.value));
+    }
+  };
+
   useEffect(() => {
-    randomise();
     getLogo();
+    getColor();
   }, []);
 
   useEffect(() => {
-    if (randomValue && logo) {
-      console.log(randomValue);
-      console.log(logo);
+    if (!randomColValue) {
+      randomise();
     }
-  }, [randomValue]);
+  }, [logo, color]);
+
+  // useEffect(() => {
+  //   if (randomValue && randomColValue) {
+
+  //   }
+  // }, [randomValue, randomColValue]);
 
   const Company = () => {
     return (
@@ -89,6 +105,8 @@ const Card = ({
   };
 
   const handleClick = () => {
+    setCurrentLogo(logo[randomValue]);
+    setCurrentColor(color[randomColValue]);
     setJobId(id);
     navigate("apply");
   };
@@ -124,16 +142,9 @@ const Card = ({
             rounded="8px"
             w="64px"
             h="64px"
-            bg={colorMode === "light" ? "default.dark" : "default.light"}
+            bg={color && color[randomColValue]}
           >
-            <Icon
-              w="40px"
-              h="40px"
-              color={
-                colorMode === "light" ? "default.light" : "default.darkGray"
-              }
-              as={logo && logo[randomValue]}
-            />
+            <Icon w="40px" h="40px" color="default.light" as={FaCat} />
           </Box>
           <Company />
           <Title />
