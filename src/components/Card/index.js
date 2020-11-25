@@ -8,12 +8,23 @@ import {
   Icon,
   Link,
   useColorMode,
+  Image,
 } from "@chakra-ui/react";
-import { FaAirbnb } from "react-icons/fa";
 import { navigate } from "@reach/router";
+import shuffle from "../../utils/shuffleArray";
+import CompanyLogos from "../../assets/CompanyLogos";
+import { useState, useEffect } from "react";
 
 const Card = ({ id, created_at, type, title, company, location, setJobId }) => {
   const { colorMode } = useColorMode();
+  const { logos, colors } = CompanyLogos();
+  const [currentLogo, setCurrentLogo] = useState();
+
+  const logo = logos.map((logo) => logo.name);
+  const color = colors.map((color) => color.value);
+
+  const randomLogoIndex = shuffle(logos);
+  const randomColorIndex = shuffle(colors);
 
   const Company = () => {
     return (
@@ -82,12 +93,12 @@ const Card = ({ id, created_at, type, title, company, location, setJobId }) => {
           <Box
             display="grid"
             placeItems="center"
-            rounded="16px"
+            rounded="8px"
             w="64px"
             h="64px"
-            bg="tomato"
+            bg={color[randomColorIndex]}
           >
-            <Icon color="white" w="40px" h="40px" as={FaAirbnb} />
+            <Icon w="40px" h="40px" color="white" as={logo[randomLogoIndex]} />
           </Box>
           <Company />
           <Title />

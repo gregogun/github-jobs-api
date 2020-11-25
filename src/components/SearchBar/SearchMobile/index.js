@@ -39,15 +39,18 @@ const SearchMobile = ({
   console.log("updated", locationInput);
 
   let input = "";
+  let on = "";
 
   const handleClick = (e) => {
     if (e.target.checked) {
-      setIsFullTimeOnly("on");
+      on = "on";
+      console.log(on);
     }
   };
 
   const handleSave = () => {
-    setLocation(input);
+    setLocation(input.replace(/\s/g, "_"));
+    setIsFullTimeOnly(on);
     onClose();
   };
 
@@ -131,7 +134,11 @@ const SearchMobile = ({
             <TitleSearch handleInputChange={handleInputChange} />
           </Box>
 
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal
+            bg={colorMode === "light" ? "default.light" : "default.darkGray"}
+            isOpen={isOpen}
+            onClose={onClose}
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Filter by location or type</ModalHeader>
