@@ -15,6 +15,7 @@ const LocationSearch = ({ colorScheme, handleInputChange, location }) => {
       <FormLabel hidden={true}>Search by location</FormLabel>
       <InputGroup>
         <InputLeftElement
+          top={{ base: 0, lg: "3px" }}
           pointerEvents="none"
           children={
             <Icon

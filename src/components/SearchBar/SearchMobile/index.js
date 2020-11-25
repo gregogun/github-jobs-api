@@ -18,6 +18,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import TitleSearch from "../TitleSearch";
@@ -35,6 +36,7 @@ const SearchMobile = ({
   const [locationInput, setLocationInput] = useState("");
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const colorScheme = useColorModeValue("default.darkGray", "default.light");
 
   let input = "";
   let on = "";
@@ -70,10 +72,10 @@ const SearchMobile = ({
     return (
       <FormControl id="checkbox">
         <Flex direction="row" align="center" h="24px">
-          <FormLabel mt="6px" fontSize="14px">
+          <FormLabel mt="6px" fontSize="16px">
             Full Time Only
           </FormLabel>
-          <Check onClick={handleClick} />
+          <Check size="lg" onClick={handleClick} />
         </Flex>
       </FormControl>
     );
@@ -81,12 +83,12 @@ const SearchMobile = ({
 
   const LocationSearch = () => {
     return (
-      <FormControl id="location-search">
+      <FormControl mb="8px" id="location-search">
         <FormLabel hidden={true}>Search by location</FormLabel>
         <InputGroup>
           <InputLeftElement
             pointerEvents="none"
-            children={<Icon as={MdLocationOn} color="gray.500" />}
+            children={<Icon color={colorScheme} as={MdLocationOn} />}
           />
           <Input
             onChange={handleLocationChange}
@@ -123,7 +125,10 @@ const SearchMobile = ({
           justify="space-between"
         >
           <Box mb="8px">
-            <TitleSearch handleInputChange={handleInputChange} />
+            <TitleSearch
+              colorScheme={colorScheme}
+              handleInputChange={handleInputChange}
+            />
           </Box>
 
           <Modal

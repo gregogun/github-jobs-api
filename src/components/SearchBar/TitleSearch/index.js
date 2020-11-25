@@ -15,6 +15,7 @@ const TitleSearch = ({ colorScheme, handleInputChange, description }) => {
       <FormLabel hidden={true}>Search by job title or keyword</FormLabel>
       <InputGroup>
         <InputLeftElement
+          top={{ base: 0, lg: "3px" }}
           pointerEvents="none"
           children={
             <Icon
