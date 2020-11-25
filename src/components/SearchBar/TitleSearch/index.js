@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { MdBusinessCenter } from "react-icons/md";
 
-const TitleSearch = ({ handleInputChange, description }) => {
+const TitleSearch = ({ colorScheme, handleInputChange, description }) => {
   return (
     <FormControl id="title-search">
       <FormLabel hidden={true}>Search by job title or keyword</FormLabel>
@@ -18,10 +18,10 @@ const TitleSearch = ({ handleInputChange, description }) => {
           pointerEvents="none"
           children={
             <Icon
-              w={{ md: "24px" }}
-              h={{ md: "24px" }}
+              w={{ base: "20px", md: "24px" }}
+              h={{ base: "20px", md: "24px" }}
               as={MdBusinessCenter}
-              color="gray.500"
+              color={colorScheme}
             />
           }
         />

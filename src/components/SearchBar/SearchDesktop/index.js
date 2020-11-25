@@ -5,6 +5,7 @@ import {
   FormLabel,
   Box,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LocationSearch from "../LocationSearch";
@@ -18,6 +19,7 @@ const SearchDesktop = ({
   setIsFullTimeOnly,
 }) => {
   const { colorMode } = useColorMode();
+  const colorScheme = useColorModeValue("default.darkGray", "default.light");
 
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -63,13 +65,13 @@ const SearchDesktop = ({
           <Flex w="60%">
             <Box w="50%">
               <TitleSearch
-                // description={description}
+                colorScheme={colorScheme}
                 handleInputChange={handleInputChange}
               />
             </Box>
             <Box w="50%">
               <LocationSearch
-                // location={location}
+                colorScheme={colorScheme}
                 handleInputChange={handleInputChange}
               />
             </Box>

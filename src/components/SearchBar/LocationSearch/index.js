@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { MdLocationOn } from "react-icons/md";
 
-const LocationSearch = ({ handleInputChange, location }) => {
+const LocationSearch = ({ colorScheme, handleInputChange, location }) => {
   return (
     <FormControl id="location-search">
       <FormLabel hidden={true}>Search by location</FormLabel>
@@ -21,11 +21,12 @@ const LocationSearch = ({ handleInputChange, location }) => {
               w={{ base: "20px", md: "24px" }}
               h={{ base: "20px", md: "24px" }}
               as={MdLocationOn}
-              color="gray.500"
+              color={colorScheme}
             />
           }
         />
         <Input
+          colorScheme={colorScheme}
           rounded="0 8px 8px 0"
           fontSize={{ base: "14px", md: "16px", lg: "18px" }}
           onChange={handleInputChange}
