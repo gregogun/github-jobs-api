@@ -13,7 +13,6 @@ const JobDetails = ({ setShowDetails, jobs, jobId }) => {
 
   return (
     <Box>
-      <h1>JobDetails</h1>
       <Link to="/">Click me to go back</Link>
       <Text>{position.title}</Text>
       <Text>{position.company}</Text>

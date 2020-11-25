@@ -17,46 +17,44 @@ import Logo from "../assets/Logo";
 import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-const FindJob = () => {
-  return (
-    <ListItem
-      textAlign="center"
-      // mr={["12px", "16px", "24px"]}
-    >
-      <Link as={ReachLink} to="/">
-        Find a job
-      </Link>
-    </ListItem>
-  );
-};
-
-const PostJob = () => {
-  return (
-    <ListItem
-      // mx={{ md: "16px" }}
-      textAlign="center"
-    >
-      <Link href="https://jobs.github.com/post" target="_blank" method="get">
-        Post a job
-      </Link>
-    </ListItem>
-  );
-};
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const FindJob = () => {
+    return (
+      <ListItem
+        textAlign="center"
+        // mr={["12px", "16px", "24px"]}
+      >
+        <Link onClick={toggleIsOpen} as={ReachLink} to="/">
+          Find a job
+        </Link>
+      </ListItem>
+    );
+  };
+
+  const PostJob = () => {
+    return (
+      <ListItem
+        // mx={{ md: "16px" }}
+        textAlign="center"
+      >
+        <Link
+          onClick={toggleIsOpen}
+          href="https://jobs.github.com/post"
+          target="_blank"
+          method="get"
+        >
+          Post a job
+        </Link>
+      </ListItem>
+    );
+  };
 
   const colorScheme = useColorModeValue("default.light", "default.darkGray");
 
-  console.log(isOpen);
-
   const toggleIsOpen = () => {
-    console.log("toggle open here");
     setIsOpen(!isOpen);
   };
 

@@ -6,10 +6,10 @@ const StyledButton = ({ bg, col, hover, onClick, children }) => {
     <Button
       onClick={onClick}
       as="button"
-      fontSize="14px"
+      fontSize="16px"
       rounded="4px"
-      w="120px"
-      h="40px"
+      w="128px"
+      h="48px"
       bg={bg}
       color={col}
       _hover={hover}

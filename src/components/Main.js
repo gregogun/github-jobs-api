@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, useColorMode } from "@chakra-ui/react";
 import useFetch from "../utils/hooks/useFetch";
 import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
-import SearchBar from "./SearchBar";
 import { Router } from "@reach/router";
 import CompanyLogos from "../assets/CompanyLogos";
-import shuffle from "../utils/shuffleArray";
 
 const Main = () => {
   const [jobId, setJobId] = useState();
+  const { colorMode } = useColorMode();
   const {
     jobs,
     ids,
@@ -20,20 +19,7 @@ const Main = () => {
     setLocation,
     setIsFullTimeOnly,
   } = useFetch();
-  const { colorMode } = useColorMode();
   const { logos, colors } = CompanyLogos();
-  const [currentLogo, setCurrentLogo] = useState();
-
-  console.log("current log is", currentLogo);
-
-  useEffect(() => {
-    const logo = logos.map((logo) => logo.name);
-    const color = colors.map((color) => color.value);
-
-    const randomLogoIndex = shuffle(logos);
-    const randomColorIndex = shuffle(colors);
-    setCurrentLogo(logos[randomLogoIndex]);
-  }, []);
 
   return (
     <Box
@@ -43,12 +29,6 @@ const Main = () => {
       minH="100vh"
       bg={colorMode === "light" ? "neutral.100" : "default.dark"}
     >
-      <SearchBar
-        setDescription={setDescription}
-        setLocation={setLocation}
-        setIsFullTimeOnly={setIsFullTimeOnly}
-        queryJobs={queryJobs}
-      />
       <Router>
         <JobBoard
           path="/"
@@ -57,9 +37,13 @@ const Main = () => {
           loadMore={loadMore}
           setJobId={setJobId}
           queryJobs={queryJobs}
-          logo={currentLogo}
+          setDescription={setDescription}
+          setLocation={setLocation}
+          setIsFullTimeOnly={setIsFullTimeOnly}
+          logos={logos}
+          colors={colors}
         />
-        <JobDetails path="apply" jobs={jobs} jobId={jobId} logo={currentLogo} />
+        <JobDetails path="apply" jobs={jobs} jobId={jobId} />
       </Router>
     </Box>
   );

@@ -1,17 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import StyledButton from "./StyledButton";
 import { Box, Text, Flex, useColorMode } from "@chakra-ui/react";
+import shuffle from "../utils/shuffleArray";
 
 const Loading = () => {
   return <Text>Loading jobs...</Text>;
 };
 
-const JobBoard = ({ jobs, isLoading, loadMore, setShowDetails, setJobId }) => {
+const JobBoard = ({
+  jobs,
+  isLoading,
+  loadMore,
+  setShowDetails,
+  setJobId,
+  queryJobs,
+  logos,
+  colors,
+  setDescription,
+  setLocation,
+  setIsFullTimeOnly,
+}) => {
   const { colorMode } = useColorMode();
+  // const [logo, setLogo] = useState();
+
+  // const randomise = () => {
+  //   const random = shuffle(logos);
+  //   setLogo(logos[random]);
+  // };
+
+  // useEffect(randomise, []);
+
+  // useEffect(() => {
+  //   console.log(logo);
+  // }, [logo]);
+
   return (
     <>
+      <SearchBar
+        setDescription={setDescription}
+        setLocation={setLocation}
+        setIsFullTimeOnly={setIsFullTimeOnly}
+        queryJobs={queryJobs}
+      />
       <Box direction="row" w="100%" minH="100%" m="auto" p="16px">
         <Box>
           <Box>
@@ -45,6 +77,8 @@ const JobBoard = ({ jobs, isLoading, loadMore, setShowDetails, setJobId }) => {
             {jobs &&
               jobs.map((job) => (
                 <Card
+                  logos={logos}
+                  colors={colors}
                   setJobId={setJobId}
                   setShowDetails={setShowDetails}
                   key={job.id}

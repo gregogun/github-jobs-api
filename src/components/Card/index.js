@@ -11,20 +11,48 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { navigate } from "@reach/router";
-import shuffle from "../../utils/shuffleArray";
-import CompanyLogos from "../../assets/CompanyLogos";
 import { useState, useEffect } from "react";
+import shuffle from "../../utils/shuffleArray";
 
-const Card = ({ id, created_at, type, title, company, location, setJobId }) => {
+const Card = ({
+  id,
+  created_at,
+  type,
+  title,
+  company,
+  location,
+  setJobId,
+  logos,
+  colors,
+}) => {
   const { colorMode } = useColorMode();
-  const { logos, colors } = CompanyLogos();
-  const [currentLogo, setCurrentLogo] = useState();
+  const [randomValue, setRandomValue] = useState();
+  const [logo, setLogo] = useState();
 
-  const logo = logos.map((logo) => logo.name);
-  const color = colors.map((color) => color.value);
+  const randomise = () => {
+    if (!randomValue) {
+      const random = shuffle(logos);
+      setRandomValue(random);
+    }
+  };
 
-  const randomLogoIndex = shuffle(logos);
-  const randomColorIndex = shuffle(colors);
+  const getLogo = () => {
+    if (!logo) {
+      setLogo(logos.map((logo) => logo.name));
+    }
+  };
+
+  useEffect(() => {
+    randomise();
+    getLogo();
+  }, []);
+
+  useEffect(() => {
+    if (randomValue && logo) {
+      console.log(randomValue);
+      console.log(logo);
+    }
+  }, [randomValue]);
 
   const Company = () => {
     return (
@@ -96,9 +124,16 @@ const Card = ({ id, created_at, type, title, company, location, setJobId }) => {
             rounded="8px"
             w="64px"
             h="64px"
-            bg={color[randomColorIndex]}
+            bg={colorMode === "light" ? "default.dark" : "default.light"}
           >
-            <Icon w="40px" h="40px" color="white" as={logo[randomLogoIndex]} />
+            <Icon
+              w="40px"
+              h="40px"
+              color={
+                colorMode === "light" ? "default.light" : "default.darkGray"
+              }
+              as={logo && logo[randomValue]}
+            />
           </Box>
           <Company />
           <Title />

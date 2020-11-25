@@ -36,15 +36,12 @@ const SearchMobile = ({
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log("updated", locationInput);
-
   let input = "";
   let on = "";
 
   const handleClick = (e) => {
     if (e.target.checked) {
       on = "on";
-      console.log(on);
     }
   };
 
@@ -56,22 +53,17 @@ const SearchMobile = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("search fired");
     queryJobs();
   };
 
   const handleInputChange = (e) => {
-    console.log("input here");
     if (e.target.name === "title") {
       setDescription(e.target.value);
-    } else {
-      setLocationInput(e.target.value);
     }
   };
 
   const handleLocationChange = (e) => {
     input = e.target.value;
-    console.log(input);
   };
 
   const Checkbox = () => {
