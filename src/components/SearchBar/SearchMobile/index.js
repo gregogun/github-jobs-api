@@ -88,14 +88,22 @@ const SearchMobile = ({
         <InputGroup>
           <InputLeftElement
             pointerEvents="none"
-            children={<Icon color={colorScheme} as={MdLocationOn} />}
+            children={
+              <Icon
+                top="3px"
+                left="3px"
+                w="24px"
+                h="24px"
+                color={colorScheme}
+                as={MdLocationOn}
+              />
+            }
           />
           <Input
             onChange={handleLocationChange}
-            rounded="0 8px 8px 0"
-            fontSize={{ base: "14px", md: "16px" }}
+            fontSize={{ base: "16px", md: "16px" }}
             w="100%"
-            h="40px"
+            h="48px"
             type="text"
             placeholder="Location"
           />

@@ -24,8 +24,10 @@ const Header = () => {
   const FindJob = () => {
     return (
       <ListItem
+        mx={{ md: "8px" }}
+        my={{ base: "16px", md: 0 }}
+        fontSize={{ base: "20px", md: "16px" }}
         textAlign="center"
-        // mr={["12px", "16px", "24px"]}
       >
         <Link onClick={toggleIsOpen} as={ReachLink} to="/">
           Find a job
@@ -37,7 +39,9 @@ const Header = () => {
   const PostJob = () => {
     return (
       <ListItem
-        // mx={{ md: "16px" }}
+        mx={{ md: "8px" }}
+        my={{ base: "16px", md: 0 }}
+        fontSize={{ base: "20px", md: "16px" }}
         textAlign="center"
       >
         <Link
@@ -79,8 +83,7 @@ const Header = () => {
         align="center"
       >
         <Flex
-          // bg="grey"
-          w="100%"
+          w={{ base: "100%", md: "70%", lg: "65%", xl: "60%" }}
           position="relative"
           display={{ base: "block", md: "flex" }}
           justify="space-between"
@@ -93,18 +96,16 @@ const Header = () => {
           </Flex>
           <Box
             display={{ base: isOpen ? "block" : "none", md: "flex" }}
-            w={{ md: "30%", lg: "30%", xl: "15%" }}
-            // bg="lightseagreen"
+            w={{ md: "50%", lg: "50%", xl: "35%" }}
             my="8px"
             mx={{ md: "16px" }}
             py="16px"
-            justifyContent={{ md: "space-between" }}
+            justifyContent={{ md: "space-evenly" }}
             borderTop={{ base: "2px solid", md: 0 }}
             borderTopColor={
               colorMode === "light" ? "default.lightGray" : "default.lightGray"
             }
             alignItems="center"
-            //flexGrow={1}
             as="ul"
             listStyleType="none"
           >
@@ -133,6 +134,8 @@ const Header = () => {
             placeItems="center"
             onClick={toggleIsOpen}
             aria-label="Open menu"
+            colorScheme={colorScheme}
+            color={colorMode === "light" ? "default.dark" : "default.light"}
             icon={isOpen ? <FaTimes /> : <FaBars />}
           />
         </Box>

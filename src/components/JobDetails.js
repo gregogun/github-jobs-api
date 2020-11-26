@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Icon, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Heading, Icon, Text, useColorMode } from "@chakra-ui/react";
 import { Link } from "@reach/router";
 import { FaCat } from "react-icons/fa";
 import shuffle from "../utils/shuffleArray";
@@ -78,17 +78,18 @@ const JobDetails = ({
         display="grid"
         placeItems="center"
         rounded="8px"
-        w="64px"
-        h="64px"
+        w="324px"
+        h="80px"
         bg={color && detailColor[0].value}
       >
-        <Icon
-          w="40px"
-          h="40px"
+        <Heading
+          fontSize="14px"
+          lineHeight="2"
+          textAlign="center"
           color="default.light"
-          // as={logo && logo[randomValue]}
-          as={FaCat}
-        />
+        >
+          {position.company}
+        </Heading>
       </Box>
       <Text>{position.title}</Text>
       <Text>{position.company}</Text>

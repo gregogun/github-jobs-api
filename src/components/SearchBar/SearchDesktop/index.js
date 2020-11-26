@@ -79,7 +79,7 @@ const SearchDesktop = ({
           <Box>
             <FormControl id="checkbox">
               <Flex direction="row" align="center" h="24px">
-                <FormLabel mt="6px" fontSize="14px">
+                <FormLabel mt="6px" fontSize="18px">
                   Full Time Only
                 </FormLabel>
                 <Checkbox onClick={handleClick} />

@@ -9,6 +9,7 @@ import {
   Link,
   useColorMode,
   Image,
+  Heading,
 } from "@chakra-ui/react";
 import { navigate } from "@reach/router";
 import { useState, useEffect } from "react";
@@ -130,21 +131,29 @@ const Card = ({
         w="100%"
         height="100%"
         // bg="silver"
-        justify="space-between"
         direction="column"
       >
         <Stack
         // bg="mistyrose"
         >
           <Box
+            padding="1"
             display="grid"
             placeItems="center"
             rounded="8px"
-            w="64px"
-            h="64px"
+            w="100%"
+            h="80px"
             bg={color && color[randomColValue]}
           >
-            <Icon w="40px" h="40px" color="default.light" as={FaCat} />
+            <Heading
+              w="90%"
+              fontSize="18px"
+              lineHeight="2"
+              textAlign="center"
+              color="default.light"
+            >
+              {company}
+            </Heading>
           </Box>
           <Company />
           <Title />

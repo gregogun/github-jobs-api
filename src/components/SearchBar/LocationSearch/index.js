@@ -32,7 +32,7 @@ const LocationSearch = ({ colorScheme, handleInputChange, location }) => {
           fontSize={{ base: "14px", md: "16px", lg: "18px" }}
           onChange={handleInputChange}
           w="100%"
-          h={{ base: "40px", lg: "48px" }}
+          h={{ base: "48px" }}
           type="text"
           placeholder="Location"
         />
