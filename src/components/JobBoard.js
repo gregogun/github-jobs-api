@@ -25,21 +25,13 @@ const JobBoard = ({
   setCurrentColor,
 }) => {
   const { colorMode } = useColorMode();
-  // const [logo, setLogo] = useState();
 
-  // const randomise = () => {
-  //   const random = shuffle(logos);
-  //   setLogo(logos[random]);
-  // };
-
-  // useEffect(randomise, []);
-
-  // useEffect(() => {
-  //   console.log(logo);
-  // }, [logo]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <Box pt="32px">
+    <Box>
       <SearchBar
         setDescription={setDescription}
         setLocation={setLocation}
@@ -91,7 +83,7 @@ const JobBoard = ({
           </Flex>
         </Box>
         {!isLoading && jobs.length >= 50 && (
-          <Flex justify="center" m="auto">
+          <Flex bg="red.200" justify="center" m="auto">
             <StyledButton bg="brand.primary" col="white" onClick={loadMore}>
               Load More
             </StyledButton>

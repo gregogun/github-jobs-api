@@ -1,17 +1,15 @@
 import {
   Box,
-  List,
   ListItem,
   Link,
   Flex,
-  Icon,
   IconButton,
   useColorMode,
   color,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link as ReachLink } from "@reach/router";
+import { Link as ReachLink, navigate } from "@reach/router";
 import React from "react";
 import Logo from "../assets/Logo";
 import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
@@ -20,6 +18,17 @@ import { useState, useEffect } from "react";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const LogoContent = () => {
+    return (
+      <Flex direction="row" align="center">
+        <Logo />
+        <Heading display={{ base: "none", md: "block" }} ml="4px">
+          gitjobs
+        </Heading>
+      </Flex>
+    );
+  };
 
   const FindJob = () => {
     return (
@@ -83,17 +92,19 @@ const Header = () => {
         align="center"
       >
         <Flex
+          align="center"
           w={{ base: "100%", md: "70%", lg: "65%", xl: "60%" }}
           position="relative"
           display={{ base: "block", md: "flex" }}
           justify="space-between"
         >
-          <Flex direction="row" align="center">
-            <Logo />
-            <Heading display={{ base: "none", md: "block" }} ml="4px">
-              gitjobs
-            </Heading>
-          </Flex>
+          <IconButton
+            onClick={() => navigate("/")}
+            variant="ghost"
+            minW="50px"
+            minH="50px"
+            icon={<LogoContent />}
+          />
           <Box
             display={{ base: isOpen ? "block" : "none", md: "flex" }}
             w={{ md: "50%", lg: "50%", xl: "35%" }}

@@ -133,7 +133,7 @@ const Card = ({
         height="100%"
         // bg="silver"
         direction="column"
-        justify="space-evenly"
+        justify="space-between"
       >
         <Stack
         // bg="mistyrose"

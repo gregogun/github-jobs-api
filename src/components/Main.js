@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Box, Icon, useColorMode } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import useFetch from "../utils/hooks/useFetch";
 import JobBoard from "./JobBoard";
 import JobDetails from "./JobDetails";
 import { Router } from "@reach/router";
 import CompanyLogos from "../assets/CompanyLogos";
-import { useEffect } from "react";
 
 const Main = () => {
   const [jobId, setJobId] = useState();
@@ -30,6 +29,7 @@ const Main = () => {
       w="100%"
       minH="100vh"
       bg={colorMode === "light" ? "neutral.100" : "default.dark"}
+      pt={{ md: "32px" }}
     >
       <Router>
         <JobBoard

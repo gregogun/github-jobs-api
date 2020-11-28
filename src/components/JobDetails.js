@@ -10,6 +10,7 @@ import {
   Stack,
   Flex,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
 import { navigate } from "@reach/router";
 import { MdKeyboardBackspace } from "react-icons/md";
@@ -39,6 +40,10 @@ const JobDetails = ({
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     getColor();
   }, []);
 
@@ -49,11 +54,7 @@ const JobDetails = ({
   const detailColor = colors.filter((color) => color.value === currentColor);
 
   return (
-    <Box
-      w={{ base: "100%", md: "80%", lg: "60%" }}
-      mt={{ md: "64px" }}
-      m="auto"
-    >
+    <Box w={{ base: "100%", md: "80%", lg: "60%" }} m="auto">
       <Box
         display={{ base: "grid" }}
         // alignItems={{ base: "center" }}
@@ -68,7 +69,7 @@ const JobDetails = ({
           _active={{ variant: "ghost  " }}
           _hover={{ variant: "ghost" }}
           position="absolute"
-          top={{ base: "8px", md: "25%" }}
+          top={{ base: "8px", md: "30%" }}
           left="8px"
           // display="inline"
           onClick={() => navigate("/")}
@@ -90,6 +91,7 @@ const JobDetails = ({
         w="90%"
         divider={
           <StackDivider
+            key={""}
             borderColor={
               colorMode === "light" ? "default.dark" : "defualt.light"
             }
@@ -112,9 +114,7 @@ const JobDetails = ({
           <Heading as="h2" marginTop="32px" mb="16px">
             Job Description:
           </Heading>
-          <Text>
-            <ReactMarkdown source={position.description} />
-          </Text>
+          <ReactMarkdown source={position.description} />
         </Box>
         <Box>
           <Heading as="h2" marginTop="32px" mb="16px">
@@ -123,9 +123,11 @@ const JobDetails = ({
           <Text>{position.how_to_apply}</Text>
         </Box>
         <Box my="32px" m="auto">
-          <StyledButton bg="dodgerblue" col="default.light">
-            Apply Now
-          </StyledButton>
+          <Link href={position.url} target="_blank" method="get">
+            <StyledButton bg="dodgerblue" col="default.light">
+              Apply Now
+            </StyledButton>
+          </Link>
         </Box>
       </Stack>
     </Box>
