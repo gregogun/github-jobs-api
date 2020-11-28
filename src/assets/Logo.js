@@ -4,7 +4,7 @@ import React from "react";
 const Logo = () => {
   const { colorMode } = useColorMode();
 
-  const fillColor = colorMode === "dark" ? "#fafafa" : "#232323";
+  const fillColor = colorMode === "light" ? "#232323" : "#fcfcfc";
 
   return (
     <svg

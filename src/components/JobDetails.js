@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Icon, Text, useColorMode } from "@chakra-ui/react";
-import { Link } from "@reach/router";
-import { FaCat } from "react-icons/fa";
-import shuffle from "../utils/shuffleArray";
+import {
+  Box,
+  Heading,
+  Icon,
+  IconButton,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  Stack,
+  Flex,
+  StackDivider,
+} from "@chakra-ui/react";
+import { navigate } from "@reach/router";
+import { MdKeyboardBackspace } from "react-icons/md";
+import ReactMarkdown from "react-markdown";
+import StyledButton from "./StyledButton";
+
+const BackArrowIcon = () => {
+  return <Icon as={MdKeyboardBackspace} w="40px" h="40px" />;
+};
 
 const JobDetails = ({
   setShowDetails,
@@ -14,26 +30,7 @@ const JobDetails = ({
   currentColor,
 }) => {
   const { colorMode } = useColorMode();
-  const [randomValue, setRandomValue] = useState();
-  const [randomColValue, setRandomColValue] = useState();
-  const [logo, setLogo] = useState();
   const [color, setColor] = useState();
-  const [newLogo, setNewLogo] = useState();
-
-  const randomise = () => {
-    if (!randomValue) {
-      const random = shuffle(logos);
-      const randomCol = shuffle(colors);
-      setRandomValue(random);
-      setRandomColValue(randomCol);
-    }
-  };
-
-  const getLogo = () => {
-    if (!logo) {
-      setLogo(logos.map((logo) => logo.name));
-    }
-  };
 
   const getColor = () => {
     if (!color) {
@@ -42,48 +39,45 @@ const JobDetails = ({
   };
 
   useEffect(() => {
-    getLogo();
     getColor();
   }, []);
 
-  useEffect(() => {
-    randomise();
-    console.log(logo);
-  }, [logo, color]);
-
-  // useEffect(() => {
-  //   if (logo && !newLogo) {
-  //     setNewLogo(logos.map((logo) => logo.name === currentLogo));
-  //   }
-  // }, [randomValue]);
-
-  useEffect(() => {
-    if (logo) {
-      setNewLogo(logos.map((logo) => logo.name === currentLogo));
-    }
-  }, [randomValue]);
-
-  console.log(currentLogo);
-
   const job = jobs.filter((job) => job.id === jobId);
   const position = job[0];
-  const description = position.description.replace(/<\/?[^>]+>/gi, "");
+  // const description = position.description.replace(/<\/?[^>]+>/gi, "");
 
   const detailColor = colors.filter((color) => color.value === currentColor);
 
   return (
-    <Box>
-      <Link to="/">Click me to go back</Link>
+    <Box
+      w={{ base: "100%", md: "80%", lg: "60%" }}
+      mt={{ md: "64px" }}
+      m="auto"
+    >
       <Box
-        display="grid"
+        display={{ base: "grid" }}
+        // alignItems={{ base: "center" }}
         placeItems="center"
-        rounded="8px"
-        w="324px"
-        h="80px"
+        position="relative"
+        rounded={{ base: 0, md: "8px" }}
+        w={{ base: "100%" }}
+        h="100px"
         bg={color && detailColor[0].value}
       >
+        <IconButton
+          _active={{ variant: "ghost  " }}
+          _hover={{ variant: "ghost" }}
+          position="absolute"
+          top={{ base: "8px", md: "25%" }}
+          left="8px"
+          // display="inline"
+          onClick={() => navigate("/")}
+          color="default.light"
+          variant="ghost"
+          icon={<BackArrowIcon />}
+        />
         <Heading
-          fontSize="14px"
+          fontSize="24px"
           lineHeight="2"
           textAlign="center"
           color="default.light"
@@ -91,11 +85,49 @@ const JobDetails = ({
           {position.company}
         </Heading>
       </Box>
-      <Text>{position.title}</Text>
-      <Text>{position.company}</Text>
-      <Text>{position.location}</Text>
-      <Text>{position.type}</Text>
-      <Text>{description}</Text>
+      <Stack
+        m="auto"
+        w="90%"
+        divider={
+          <StackDivider
+            borderColor={
+              colorMode === "light" ? "default.dark" : "defualt.light"
+            }
+          />
+        }
+        m="auto"
+      >
+        <Box w={{ base: "300px", md: "85%" }}>
+          <Heading as="h1" my="32px">
+            {position.title}
+          </Heading>
+        </Box>
+        <Box>
+          <Flex p="8px" justify="space-between" direction="row">
+            <Text>{position.location}</Text>
+            <Text>{position.type}</Text>
+          </Flex>
+        </Box>
+        <Box>
+          <Heading as="h2" marginTop="32px" mb="16px">
+            Job Description:
+          </Heading>
+          <Text>
+            <ReactMarkdown source={position.description} />
+          </Text>
+        </Box>
+        <Box>
+          <Heading as="h2" marginTop="32px" mb="16px">
+            How to Apply:
+          </Heading>
+          <Text>{position.how_to_apply}</Text>
+        </Box>
+        <Box my="32px" m="auto">
+          <StyledButton bg="dodgerblue" col="default.light">
+            Apply Now
+          </StyledButton>
+        </Box>
+      </Stack>
     </Box>
   );
 };

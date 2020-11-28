@@ -24,16 +24,10 @@ const Main = () => {
   const [currentLogo, setCurrentLogo] = useState();
   const [currentColor, setCurrentColor] = useState();
 
-  useEffect(() => {
-    console.log(currentLogo);
-    console.log(currentColor);
-  }, [currentColor, currentLogo]);
-
   return (
     <Box
       as="main"
-      pt="32px"
-      w="100vw"
+      w="100%"
       minH="100vh"
       bg={colorMode === "light" ? "neutral.100" : "default.dark"}
     >

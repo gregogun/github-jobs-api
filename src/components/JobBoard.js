@@ -39,7 +39,7 @@ const JobBoard = ({
   // }, [logo]);
 
   return (
-    <>
+    <Box pt="32px">
       <SearchBar
         setDescription={setDescription}
         setLocation={setLocation}
@@ -98,7 +98,7 @@ const JobBoard = ({
           </Flex>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

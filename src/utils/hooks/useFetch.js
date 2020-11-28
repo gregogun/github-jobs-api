@@ -25,7 +25,7 @@ const useFetch = () => {
   // let isFull = "";
 
   const fetchData = () => {
-    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${page}`;
+    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${page}&markdown=true`;
 
     console.log("fetchData is here", urlCopy);
 
@@ -47,6 +47,7 @@ const useFetch = () => {
       .then((data) => {
         setIsLoading(false);
         setJobs(data);
+        console.log(data);
       }, getIds)
       .catch((e) => console.log(e));
   };

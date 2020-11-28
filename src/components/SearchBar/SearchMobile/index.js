@@ -139,13 +139,14 @@ const SearchMobile = ({
             />
           </Box>
 
-          <Modal
-            bg={colorMode === "light" ? "default.light" : "default.darkGray"}
-            isOpen={isOpen}
-            onClose={onClose}
-          >
+          <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent
+              bg={colorMode === "light" ? "default.light" : "default.darkGray"}
+              color={
+                colorMode === "light" ? "default.darkGray" : "default.light"
+              }
+            >
               <ModalHeader>Filter by location or type</ModalHeader>
               <ModalCloseButton />
               <ModalBody>

@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 
-const StyledButton = ({ bg, col, hover, onClick, children }) => {
+const StyledButton = ({ bg, col, hover, onClick, children, ...props }) => {
   return (
     <Button
+      {...props}
       onClick={onClick}
       as="button"
       fontSize="16px"

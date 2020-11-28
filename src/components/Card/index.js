@@ -78,7 +78,7 @@ const Card = ({
       >
         <Text
           fontSize="14px"
-          color={colorMode === "light" ? "gray.500" : "default.lightGray"}
+          color={colorMode === "light" ? "#888" : "default.lightGray"}
           fontWeight="bold"
         >
           {company}
@@ -94,6 +94,7 @@ const Card = ({
         w="300px"
       >
         <Text
+          color={colorMode === "light" ? "default.darkGray" : "default.light"}
           fontSize="18px"
           onClick={handleClick}
           fontWeight="bold"
@@ -123,7 +124,7 @@ const Card = ({
       rounded="16px"
       // w={["100%", "90%", "75%", "30%"]}
       w="340px"
-      h="280px"
+      minH="300px"
       m={["16px 0", "16px 0", "16px 32px"]}
       p="16px"
     >
@@ -132,6 +133,7 @@ const Card = ({
         height="100%"
         // bg="silver"
         direction="column"
+        justify="space-evenly"
       >
         <Stack
         // bg="mistyrose"
@@ -147,7 +149,7 @@ const Card = ({
           >
             <Heading
               w="90%"
-              fontSize="18px"
+              fontSize="20px"
               lineHeight="2"
               textAlign="center"
               color="default.light"
