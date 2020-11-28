@@ -5,7 +5,8 @@ const customTheme = extendTheme({
   styles: {
     global: (props) => ({
       "html, body": {
-        bg: props.colorMode === "light" ? "#fcfcfc" : "#55555",
+        bg: props.colorMode === "light" ? "#fcfcfc" : "#232323",
+        overflowX: "hidden",
       },
     }),
   },
