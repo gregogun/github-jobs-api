@@ -54,7 +54,12 @@ const JobDetails = ({
   const detailColor = colors.filter((color) => color.value === currentColor);
 
   return (
-    <Box w={{ base: "100%", md: "80%", lg: "60%" }} m="auto">
+    <Box
+      rounded="0 0 16px 16px"
+      w={{ base: "100%", md: "80%", lg: "60%" }}
+      m="auto"
+      bg={colorMode === "light" ? "white" : "default.darkGray"}
+    >
       <Box
         display={{ base: "grid" }}
         // alignItems={{ base: "center" }}
@@ -122,9 +127,9 @@ const JobDetails = ({
           </Heading>
           <Text>{position.how_to_apply}</Text>
         </Box>
-        <Box my="32px" m="auto">
+        <Box m="auto">
           <Link href={position.url} target="_blank" method="get">
-            <StyledButton bg="dodgerblue" col="default.light">
+            <StyledButton my="32px" bg="dodgerblue" col="default.light">
               Apply Now
             </StyledButton>
           </Link>

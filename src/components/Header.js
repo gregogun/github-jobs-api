@@ -100,6 +100,7 @@ const Header = () => {
           justify="space-between"
         >
           <IconButton
+            autoFocus={true}
             onClick={() => navigate("/")}
             variant="ghost"
             minW="50px"

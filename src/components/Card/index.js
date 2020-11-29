@@ -5,16 +5,13 @@ import {
   Flex,
   ListItem,
   Text,
-  Icon,
   Link,
   useColorMode,
-  Image,
   Heading,
 } from "@chakra-ui/react";
-import { navigate } from "@reach/router";
+import { Link as ReachLink } from "@reach/router";
 import { useState, useEffect } from "react";
 import shuffle from "../../utils/shuffleArray";
-import { FaCat } from "react-icons/fa";
 
 const Card = ({
   id,
@@ -30,22 +27,12 @@ const Card = ({
   setCurrentColor,
 }) => {
   const { colorMode } = useColorMode();
-  const [randomValue, setRandomValue] = useState();
   const [randomColValue, setRandomColValue] = useState();
-  const [logo, setLogo] = useState();
   const [color, setColor] = useState();
 
   const randomise = () => {
-    const random = shuffle(logos);
     const randomCol = shuffle(colors);
-    setRandomValue(random);
     setRandomColValue(randomCol);
-  };
-
-  const getLogo = () => {
-    if (!logo) {
-      setLogo(logos.map((logo) => logo.name));
-    }
   };
 
   const getColor = () => {
@@ -55,7 +42,6 @@ const Card = ({
   };
 
   useEffect(() => {
-    getLogo();
     getColor();
   }, []);
 
@@ -63,19 +49,18 @@ const Card = ({
     if (!randomColValue) {
       randomise();
     }
-  }, [logo, color]);
+  }, [color]);
 
-  // useEffect(() => {
-  //   if (randomValue && randomColValue) {
-
-  //   }
-  // }, [randomValue, randomColValue]);
+  useEffect(() => {
+    if (color && id) {
+      setCurrentColor(color[randomColValue]);
+      setJobId(id);
+    }
+  }, [color, id]);
 
   const Company = () => {
     return (
-      <Box
-      //bg="wheat"
-      >
+      <Box>
         <Text
           fontSize="14px"
           color={colorMode === "light" ? "#888" : "default.lightGray"}
@@ -89,54 +74,34 @@ const Card = ({
 
   const Title = () => {
     return (
-      <Box
-        // bg="lightseagreen"
-        w="300px"
-      >
+      <Box w="300px">
         <Text
           color={colorMode === "light" ? "default.darkGray" : "default.light"}
           fontSize="18px"
-          onClick={handleClick}
           fontWeight="bold"
           cursor="pointer"
         >
-          <Link href="#0">{title}</Link>
+          <Link as={ReachLink} to="apply">
+            {title}
+          </Link>
         </Text>
       </Box>
     );
   };
 
-  const handleClick = () => {
-    setCurrentLogo(logo[randomValue]);
-    setCurrentColor(color[randomColValue]);
-    setJobId(id);
-    navigate("apply");
-  };
-
   return (
     <ListItem
       boxShadow="0px 2px 2px rgba(50, 50, 50, 0.12)"
-      // border="2px solid"
-      // borderColor="lightgray"
       bg={colorMode === "light" ? "default.light" : "default.darkGray"}
       listStyleType="none"
       rounded="16px"
-      // w={["100%", "90%", "75%", "30%"]}
       w="340px"
       minH="300px"
       m={["16px 0", "16px 0", "16px 32px"]}
       p="16px"
     >
-      <Stack
-        w="100%"
-        height="100%"
-        // bg="silver"
-        direction="column"
-        justify="space-between"
-      >
-        <Stack
-        // bg="mistyrose"
-        >
+      <Stack w="100%" height="100%" direction="column" justify="space-between">
+        <Stack>
           <Box
             padding="1"
             display="grid"
@@ -158,9 +123,7 @@ const Card = ({
           </Box>
           <Company />
           <Title />
-          <Box
-          //bg="lightcyan"
-          >
+          <Box>
             <Text
               fontWeight="bold"
               fontSize="14px"
