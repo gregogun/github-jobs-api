@@ -6,7 +6,7 @@ This app was originally created as a submission for the Chingu Voyage 25 solo pr
 
 Pulling data from the [Github Jobs API](https://jobs.github.com/api), it's used to create a site for those seeking their first/next job in tech with re-imagined design and functionality.
 
-**LIVE LINK** - https://git-jobs-woad.vercel.app/
+**LIVE LINK** - https://go-gitjobs.netlify.app/
 
 ## Features
 
@@ -20,7 +20,7 @@ Pulling data from the [Github Jobs API](https://jobs.github.com/api), it's used 
 
 **Live version**:
 
-[**gitjobs**](https://git-jobs-woad.vercel.app/)
+[**gitjobs**](https://go-gitjobs.netlify.app/)
 
 - From the repo:
 
