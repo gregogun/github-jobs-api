@@ -23,7 +23,6 @@ import {
 import React, { useState } from "react";
 import TitleSearch from "../TitleSearch";
 import StyledButton from "../../StyledButton";
-// import SearchModal from "../Modal.js";
 import { FaFilter } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 
@@ -114,7 +113,6 @@ const SearchMobile = ({
 
   return (
     <Box
-      // display={{ base: "block", md: "none" }}
       bg={colorMode === "light" ? "default.light" : "default.darkGray"}
       boxShadow="0px 2px 2px rgba(50, 50, 50, 0.12)"
       padding="16px"
@@ -124,13 +122,7 @@ const SearchMobile = ({
       mb="32px"
     >
       <form action="" onSubmit={handleSubmit}>
-        <Flex
-          direction="column"
-          // bg="grey"
-          p="8px"
-          w="100%"
-          justify="space-between"
-        >
+        <Flex direction="column" p="8px" w="100%" justify="space-between">
           <Box mb="8px">
             <TitleSearch
               colorScheme={colorScheme}

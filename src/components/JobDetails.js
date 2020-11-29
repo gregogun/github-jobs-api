@@ -21,15 +21,7 @@ const BackArrowIcon = () => {
   return <Icon as={MdKeyboardBackspace} w="40px" h="40px" />;
 };
 
-const JobDetails = ({
-  setShowDetails,
-  jobs,
-  jobId,
-  logos,
-  colors,
-  currentLogo,
-  currentColor,
-}) => {
+const JobDetails = ({ jobs, jobId, colors, currentColor }) => {
   const { colorMode } = useColorMode();
   const [color, setColor] = useState();
 
@@ -49,7 +41,6 @@ const JobDetails = ({
 
   const job = jobs.filter((job) => job.id === jobId);
   const position = job[0];
-  // const description = position.description.replace(/<\/?[^>]+>/gi, "");
 
   const detailColor = colors.filter((color) => color.value === currentColor);
 
@@ -62,7 +53,6 @@ const JobDetails = ({
     >
       <Box
         display={{ base: "grid" }}
-        // alignItems={{ base: "center" }}
         placeItems="center"
         position="relative"
         rounded={{ base: "0 0 32px 32px" }}
@@ -76,7 +66,6 @@ const JobDetails = ({
           position="absolute"
           top={{ base: "8px", md: "30%" }}
           left="8px"
-          // display="inline"
           onClick={() => navigate("/")}
           color="default.light"
           variant="ghost"

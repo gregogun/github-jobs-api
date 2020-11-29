@@ -55,7 +55,6 @@ const SearchDesktop = ({
       <form action="" onSubmit={handleSubmit}>
         <Flex
           direction="row"
-          // bg="wheat"
           p="8px"
           align="center"
           w="100%"

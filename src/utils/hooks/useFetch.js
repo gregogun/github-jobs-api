@@ -20,9 +20,6 @@ const useFetch = () => {
   };
 
   let urlCopy = url;
-  // let desc = "";
-  // let loc = "";
-  // let isFull = "";
 
   const fetchData = () => {
     urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${page}&markdown=true`;
@@ -53,8 +50,6 @@ const useFetch = () => {
   };
 
   const queryJobs = () => {
-    // const { description, location, isFullTimeOnly } = query;
-
     setPage(1);
     urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${1}`;
 

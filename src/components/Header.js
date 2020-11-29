@@ -5,7 +5,6 @@ import {
   Flex,
   IconButton,
   useColorMode,
-  color,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -13,7 +12,7 @@ import { Link as ReachLink, navigate } from "@reach/router";
 import React from "react";
 import Logo from "../assets/Logo";
 import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +85,6 @@ const Header = () => {
         p="16px 16px 4px 16px"
         m="auto"
         w={{ base: "100%", md: "90%", lg: "70%" }}
-        // bg="lightyellow"
         as="nav"
         direction="row"
         justify="space-between"

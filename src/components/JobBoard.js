@@ -42,7 +42,6 @@ const JobBoard = ({
           <Box>
             <Box
               my="8px"
-              // bg="lightseagreen"
               w={{ base: "100%", sm: "75%", md: "50%", lg: "60%" }}
               m="auto"
             >
@@ -58,7 +57,6 @@ const JobBoard = ({
 
           <Flex
             height="100%"
-            // bg="skyblue"
             grow="1"
             justify="center"
             as="ul"
