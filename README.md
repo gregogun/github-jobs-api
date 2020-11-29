@@ -1,4 +1,4 @@
-# github-jobs-api
+# gitjobs
 
 ## Overview
 
