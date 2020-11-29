@@ -115,8 +115,7 @@ const Card = ({
 
   return (
     <ListItem
-      boxShadow="2px 
-      2px 4px 0 rgba(50, 50, 50, 0.12)"
+      boxShadow="0px 2px 2px rgba(50, 50, 50, 0.12)"
       // border="2px solid"
       // borderColor="lightgray"
       bg={colorMode === "light" ? "default.light" : "default.darkGray"}

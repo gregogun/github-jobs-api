@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import StyledButton from "./StyledButton";
-import { Box, Text, Flex, useColorMode } from "@chakra-ui/react";
-import shuffle from "../utils/shuffleArray";
+import { Box, Text, Flex, useColorMode, useStyles } from "@chakra-ui/react";
 
 const Loading = () => {
   return <Text>Loading jobs...</Text>;
@@ -31,7 +30,7 @@ const JobBoard = ({
   }, []);
 
   return (
-    <Box>
+    <Box mt="32px">
       <SearchBar
         setDescription={setDescription}
         setLocation={setLocation}
@@ -82,14 +81,14 @@ const JobBoard = ({
               ))}
           </Flex>
         </Box>
-        {!isLoading && jobs.length >= 50 && (
-          <Flex bg="red.200" justify="center" m="auto">
-            <StyledButton bg="brand.primary" col="white" onClick={loadMore}>
-              Load More
-            </StyledButton>
-          </Flex>
-        )}
       </Box>
+      {!isLoading && jobs.length >= 50 && (
+        <Flex mt="16px" justify="center" m="auto">
+          <StyledButton bg="brand.primary" col="white" onClick={loadMore}>
+            Load More
+          </StyledButton>
+        </Flex>
+      )}
     </Box>
   );
 };

@@ -29,7 +29,6 @@ const Main = () => {
       w="100%"
       minH="100vh"
       bg={colorMode === "light" ? "neutral.100" : "default.dark"}
-      pt={{ md: "32px" }}
     >
       <Router>
         <JobBoard

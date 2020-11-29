@@ -73,6 +73,7 @@ const Header = () => {
 
   return (
     <Box
+      boxShadow="0px 1px 1px rgba(50, 50, 50, 0.12)"
       as="header"
       display="grid"
       placeItems="center"
@@ -112,7 +113,7 @@ const Header = () => {
             mx={{ md: "16px" }}
             py="16px"
             justifyContent={{ md: "space-evenly" }}
-            borderTop={{ base: "2px solid", md: 0 }}
+            borderTop={{ base: "1px solid", md: 0 }}
             borderTopColor={
               colorMode === "light" ? "default.lightGray" : "default.lightGray"
             }

@@ -60,9 +60,9 @@ const JobDetails = ({
         // alignItems={{ base: "center" }}
         placeItems="center"
         position="relative"
-        rounded={{ base: 0, md: "8px" }}
+        rounded={{ base: "0 0 32px 32px" }}
         w={{ base: "100%" }}
-        h="100px"
+        h="128px"
         bg={color && detailColor[0].value}
       >
         <IconButton

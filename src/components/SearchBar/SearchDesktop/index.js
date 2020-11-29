@@ -45,8 +45,7 @@ const SearchDesktop = ({
   return (
     <Box
       bg={colorMode === "light" ? "default.light" : "default.darkGray"}
-      boxShadow="2px 
-    2px 4px 0 rgba(50, 50, 50, 0.12)"
+      boxShadow="0px 2px 2px rgba(50, 50, 50, 0.12)"
       padding="16px"
       rounded="8px"
       w={{ base: "90%", md: "80%", lg: "75%", xl: "70%" }}
