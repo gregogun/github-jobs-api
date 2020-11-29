@@ -9,19 +9,19 @@ const SearchBar = ({
   setLocation,
   setIsFullTimeOnly,
 }) => {
-  const [isLessThanMd] = useMediaQuery("(max-width: 47em");
+  const [isBiggerThan768] = useMediaQuery("(min-width: 768px");
 
   return (
     <>
-      {isLessThanMd ? (
-        <SearchMobile
+      {isBiggerThan768 ? (
+        <SearchDesktop
           setDescription={setDescription}
           setLocation={setLocation}
           setIsFullTimeOnly={setIsFullTimeOnly}
           queryJobs={queryJobs}
         />
       ) : (
-        <SearchDesktop
+        <SearchMobile
           setDescription={setDescription}
           setLocation={setLocation}
           setIsFullTimeOnly={setIsFullTimeOnly}
