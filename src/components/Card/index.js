@@ -21,14 +21,17 @@ const Card = ({
   company,
   location,
   setJobId,
-  logos,
   colors,
-  setCurrentLogo,
   setCurrentColor,
 }) => {
   const { colorMode } = useColorMode();
   const [randomColValue, setRandomColValue] = useState();
   const [color, setColor] = useState();
+
+  const handleClick = () => {
+    setCurrentColor(color[randomColValue]);
+    setJobId(id);
+  };
 
   const randomise = () => {
     const randomCol = shuffle(colors);
@@ -50,13 +53,6 @@ const Card = ({
       randomise();
     }
   }, [color]);
-
-  useEffect(() => {
-    if (color && id) {
-      setCurrentColor(color[randomColValue]);
-      setJobId(id);
-    }
-  }, [color, id]);
 
   const Company = () => {
     return (
@@ -81,7 +77,7 @@ const Card = ({
           fontWeight="bold"
           cursor="pointer"
         >
-          <Link as={ReachLink} to="apply">
+          <Link as={ReachLink} to="apply" onClick={handleClick}>
             {title}
           </Link>
         </Text>
