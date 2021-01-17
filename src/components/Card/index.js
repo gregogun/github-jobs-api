@@ -117,7 +117,6 @@ const Card = ({
               {company}
             </Heading>
           </Box>
-          <Company />
           <Title />
           <Box>
             <Text
