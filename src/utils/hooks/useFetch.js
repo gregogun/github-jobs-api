@@ -5,7 +5,7 @@ const useFetch = () => {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const BASE_URL = `http://localhost:8888/`;
+  const BASE_URL = `https://gitjobs-server.herokuapp.com/`;
   const [ids, setIds] = useState({});
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
