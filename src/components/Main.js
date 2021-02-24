@@ -9,16 +9,7 @@ import CompanyLogos from "../assets/CompanyLogos";
 const Main = () => {
   const [jobId, setJobId] = useState();
   const { colorMode } = useColorMode();
-  const {
-    jobs,
-    ids,
-    isLoading,
-    queryJobs,
-    loadMore,
-    setDescription,
-    setLocation,
-    setIsFullTimeOnly,
-  } = useFetch();
+  const { jobs } = useFetch();
   const { logos, colors } = CompanyLogos();
   const [currentLogo, setCurrentLogo] = useState();
   const [currentColor, setCurrentColor] = useState();
@@ -33,14 +24,7 @@ const Main = () => {
       <Router>
         <JobBoard
           path="/"
-          jobs={jobs}
-          isLoading={isLoading}
-          loadMore={loadMore}
           setJobId={setJobId}
-          queryJobs={queryJobs}
-          setDescription={setDescription}
-          setLocation={setLocation}
-          setIsFullTimeOnly={setIsFullTimeOnly}
           logos={logos}
           setCurrentLogo={setCurrentLogo}
           colors={colors}
@@ -48,8 +32,8 @@ const Main = () => {
         />
         <JobDetails
           path="apply"
-          jobs={jobs}
           jobId={jobId}
+          jobs={jobs}
           logos={logos}
           colors={colors}
           currentLogo={currentLogo}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const useFetch = () => {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`;
+  const BASE_URL = `http://localhost:8888/`;
   const [ids, setIds] = useState({});
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -19,23 +20,17 @@ const useFetch = () => {
     setIds(ids);
   };
 
-  let urlCopy = url;
-
   const fetchData = () => {
-    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${page}&markdown=true`;
-
-    // console.log("fetchData is here", urlCopy);
-
     setIsLoading(true);
 
     const getJobs = async () => {
-      const response = await fetch(urlCopy);
+      const response = await axios.post(`${BASE_URL}fetch`);
 
       if (response.status !== 200) {
         throw new Error("cannot fetch data");
       }
 
-      const data = await response.json();
+      const data = await response.data;
 
       return data;
     };
@@ -44,27 +39,32 @@ const useFetch = () => {
       .then((data) => {
         setIsLoading(false);
         setJobs(data);
-        // console.log(data);
+        console.log(data);
       }, getIds)
-      .catch((e) => console.log(e));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   const queryJobs = () => {
-    setPage(1);
-    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${1}`;
-
-    console.log("queryJobs is here", urlCopy);
-
     setIsLoading(true);
 
     const getJobs = async () => {
-      const response = await fetch(urlCopy);
+      const options = {
+        description,
+        location,
+        isFullTimeOnly,
+        page,
+      };
+
+      const response = await axios.post(`${BASE_URL}query`, options);
 
       if (response.status !== 200) {
         throw new Error("cannot fetch data");
       }
 
-      const data = await response.json();
+      const data = await response.data;
 
       return data;
     };
@@ -74,25 +74,31 @@ const useFetch = () => {
         setIsLoading(false);
         setJobs(data);
       }, getIds)
-      .catch((e) => console.log(e));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   const loadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
 
-    urlCopy += `description=${description}&location=${location}&full_time=${isFullTimeOnly}&page=${nextPage}`;
-
-    console.log("loadMore is here", urlCopy);
-
     const getJobs = async () => {
-      const response = await fetch(urlCopy);
+      const options = {
+        description,
+        location,
+        isFullTimeOnly,
+        nextPage,
+      };
+
+      const response = await axios.post(`${BASE_URL}load`, options);
 
       if (response.status !== 200) {
         throw new Error("cannot fetch data");
       }
 
-      const data = await response.json();
+      const data = await response.data;
 
       return data;
     };
@@ -104,7 +110,10 @@ const useFetch = () => {
           setJobs(jobs.concat(data));
         }
       }, getIds)
-      .catch((e) => console.log(e));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   useEffect(fetchData, []);
@@ -115,6 +124,7 @@ const useFetch = () => {
     isLoading,
     queryJobs,
     loadMore,
+    fetchData,
     setDescription,
     setLocation,
     setIsFullTimeOnly,

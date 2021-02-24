@@ -15,7 +15,6 @@ import {
 import { navigate } from "@reach/router";
 import { MdKeyboardBackspace } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
-import StyledButton from "./StyledButton";
 
 const BackArrowIcon = () => {
   return <Icon as={MdKeyboardBackspace} w="40px" h="40px" />;
@@ -37,6 +36,9 @@ const JobDetails = ({ jobs, jobId, colors, currentColor }) => {
 
   useEffect(() => {
     getColor();
+    if (jobs) {
+      console.log(jobs);
+    }
   }, []);
 
   const job = jobs.filter((job) => job.id === jobId);

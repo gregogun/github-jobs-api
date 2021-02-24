@@ -6,10 +6,13 @@ import {
   InputGroup,
   FormControl,
   InputLeftElement,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { MdLocationOn } from "react-icons/md";
 
 const LocationSearch = ({ colorScheme, handleInputChange, location }) => {
+  const { light } = useColorModeValue("default.light", "default.dark");
+  const { dark } = useColorModeValue("default.dark", "default.light");
   return (
     <FormControl id="location-search">
       <FormLabel hidden={true}>Search by location</FormLabel>
