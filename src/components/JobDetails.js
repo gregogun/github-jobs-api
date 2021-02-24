@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { navigate } from "@reach/router";
 import { MdKeyboardBackspace } from "react-icons/md";
+import StyledButton from "./StyledButton";
 import ReactMarkdown from "react-markdown";
 
 const BackArrowIcon = () => {
